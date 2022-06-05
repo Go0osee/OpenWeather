@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="favourites">Избранное</string>
+    <string name="in_the_morning">Утром</string>
+    <string name="fells_like_daily">Ощущается как</string>
+    <string name="in_the_daytime">Днём</string>
+    <string name="in_the_evening">Вечером</string>
+    <string name="at_night">Ночью</string>
+</resources>
