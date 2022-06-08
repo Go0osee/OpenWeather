@@ -1,7 +1,7 @@
 package com.go0ose.openweather.domain
 
-import com.go0ose.openweather.utils.ext.toCityWeatherFromDataBase
-import com.go0ose.openweather.utils.ext.toCityWeatherEntity
+import com.go0ose.openweather.utils.mapper.toCityWeatherFromDataBase
+import com.go0ose.openweather.utils.mapper.toCityWeatherEntity
 import com.go0ose.openweather.domain.model.CityWeatherFromDataBase
 
 class CityBaseInteractorImpl(

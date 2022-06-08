@@ -12,6 +12,6 @@ interface WeatherApi {
         @Query("appid") appid: String = RetrofitClient.OPEN_WEATHER_API_KEY,
         @Query("exclude") exclude: String = "minutely,alerts",
         @Query("units") units: String = "metric",
-        @Query("lang") lang: String = "ru"
+        @Query("lang") lang: String
     ): WeatherResponse
 }

@@ -1,6 +1,5 @@
 package com.go0ose.openweather.presentation.di
 
-import android.content.Context
 import com.go0ose.openweather.domain.CityBaseInteractor
 import com.go0ose.openweather.domain.WeatherInteractor
 import com.go0ose.openweather.presentation.fragments.citybase.CityBaseViewModel
@@ -8,6 +7,7 @@ import com.go0ose.openweather.presentation.fragments.search.SearchViewModel
 import com.go0ose.openweather.presentation.fragments.weather.WeatherViewModel
 import com.go0ose.openweather.presentation.mainActivity.MainViewModel
 import com.go0ose.openweather.utils.prefs.SharedPreferenceManager
+import com.go0ose.openweather.utils.resource.ResourceProvider
 import dagger.Module
 import dagger.Provides
 
@@ -18,9 +18,10 @@ class ViewModelModule {
     fun provideWeatherViewModel(
         weatherInteractor: WeatherInteractor,
         cityBaseInteractor: CityBaseInteractor,
-        prefs: SharedPreferenceManager
+        prefs: SharedPreferenceManager,
+        resourceProvider: ResourceProvider
     ): WeatherViewModel {
-        return WeatherViewModel(weatherInteractor, cityBaseInteractor, prefs)
+        return WeatherViewModel(weatherInteractor, cityBaseInteractor, prefs, resourceProvider)
     }
 
     @Provides

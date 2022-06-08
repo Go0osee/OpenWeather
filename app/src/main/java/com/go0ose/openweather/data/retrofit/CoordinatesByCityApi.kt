@@ -10,7 +10,7 @@ interface CoordinatesByCityApi {
     suspend fun getCoordinatesResponse(
         @Path("city") cityName: String,
         @Query("access_token") accessToken: String = RetrofitClient.MAPBOX_API_KEY,
-        @Query("language") language: String = "ru",
+        @Query("language") language: String,
         @Query("types") types: String = "place",
         @Query("limit") limit: String = "10"
     ): CityResponse

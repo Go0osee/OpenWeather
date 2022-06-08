@@ -10,11 +10,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.go0ose.openweather.domain.CityBaseInteractor
 import com.go0ose.openweather.domain.WeatherInteractor
-import com.go0ose.openweather.utils.ext.toCityCoordinates
-import com.go0ose.openweather.utils.ext.toCityWeatherFromDataBaseFirstLogin
+import com.go0ose.openweather.utils.mapper.toCityCoordinates
+import com.go0ose.openweather.utils.mapper.toCityWeatherFromDataBaseFirstLogin
 import com.go0ose.openweather.domain.model.CityCoordinates
 import com.go0ose.openweather.domain.model.CityWeatherFromDataBase
-import com.go0ose.openweather.utils.prefs.SharedPreferenceImpl
 import com.go0ose.openweather.utils.prefs.SharedPreferenceManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices

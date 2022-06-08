@@ -3,6 +3,7 @@ package com.go0ose.openweather.domain.model
 import androidx.annotation.DrawableRes
 import com.go0ose.openweather.domain.model.DailyItem
 import com.go0ose.openweather.domain.model.HourlyItem
+import com.go0ose.openweather.utils.mapper.enums.WingDeg
 
 class WeatherWrapper(
     var cityName: String,
@@ -17,6 +18,7 @@ class WeatherWrapper(
     val description: String,
     val fellsLike: String,
     val windSpeed: String,
+    val windDeg: WingDeg,
     val humidity: String,
     val pressure: String,
     val hourlyItems: List<HourlyItem>,

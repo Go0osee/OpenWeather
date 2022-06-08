@@ -1,7 +1,7 @@
 package com.go0ose.openweather.domain
 
-import com.go0ose.openweather.utils.ext.toCityItem
-import com.go0ose.openweather.utils.ext.toWeatherWrapper
+import com.go0ose.openweather.utils.mapper.toCityItem
+import com.go0ose.openweather.utils.mapper.toWeatherWrapper
 import com.go0ose.openweather.domain.model.CityCoordinates
 import com.go0ose.openweather.domain.model.CityItem
 import com.go0ose.openweather.domain.model.WeatherWrapper

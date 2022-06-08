@@ -37,7 +37,7 @@ class CityBaseViewHolder(
                 description.text = item.description
                 weatherImage.setImageResource(item.mainIcon)
                 temp.text = item.temp
-                feelsLike.text = item.fellsLike
+                feelsLike.text = context.getString(R.string.feels_like) + item.fellsLike
 
                 root.setOnClickListener {
                     itemView.startAnimation(

@@ -6,12 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.go0ose.openweather.domain.CityBaseInteractor
 import com.go0ose.openweather.domain.WeatherInteractor
-import com.go0ose.openweather.utils.ext.toCityCoordinates
-import com.go0ose.openweather.utils.ext.toCityWeatherFromDataBase
+import com.go0ose.openweather.utils.mapper.toCityCoordinates
+import com.go0ose.openweather.utils.mapper.toCityWeatherFromDataBase
 import com.go0ose.openweather.domain.model.CityWeatherFromDataBase
 import com.go0ose.openweather.domain.model.WeatherWrapper
-import com.go0ose.openweather.presentation.fragments.weather.WeatherViewModel
-import com.go0ose.openweather.utils.ext.toFirstFavorite
+import com.go0ose.openweather.utils.mapper.toFirstFavorite
 import com.go0ose.openweather.utils.prefs.SharedPreferenceManager
 import kotlinx.coroutines.launch
 

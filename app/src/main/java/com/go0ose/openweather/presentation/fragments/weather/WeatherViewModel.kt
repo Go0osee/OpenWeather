@@ -4,21 +4,22 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.go0ose.openweather.R
 import com.go0ose.openweather.domain.CityBaseInteractor
 import com.go0ose.openweather.domain.WeatherInteractor
-import com.go0ose.openweather.utils.ext.toCityCoordinates
+import com.go0ose.openweather.utils.mapper.toCityCoordinates
 import com.go0ose.openweather.domain.model.CityWeatherFromDataBase
 import com.go0ose.openweather.domain.model.WeatherWrapper
-import com.go0ose.openweather.presentation.mainActivity.MainViewModel
-import com.go0ose.openweather.utils.prefs.SharedPreferenceImpl
 import com.go0ose.openweather.utils.prefs.SharedPreferenceManager
+import com.go0ose.openweather.utils.resource.ResourceProvider
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class WeatherViewModel @Inject constructor(
     private val weatherInteractor: WeatherInteractor,
     private val cityBaseInteractor: CityBaseInteractor,
-    private val prefs: SharedPreferenceManager
+    private val prefs: SharedPreferenceManager,
+    private val resourceProvider: ResourceProvider
 ) : ViewModel() {
 
     companion object {
@@ -30,7 +31,13 @@ class WeatherViewModel @Inject constructor(
 
     fun loadWeather(cityWeatherFromDataBase: CityWeatherFromDataBase) {
         viewModelScope.launch {
-            _weatherWrapper.postValue(weatherInteractor.getWeather(cityWeatherFromDataBase.toCityCoordinates()))
+            var weather = weatherInteractor.getWeather(cityWeatherFromDataBase.toCityCoordinates())
+
+            weather.dailyItems[0].day = resourceProvider.getString(R.string.today)
+            weather.dailyItems[1].day = resourceProvider.getString(R.string.tomorrow)
+            weather.hourlyItems[0].time = resourceProvider.getString(R.string.now)
+
+            _weatherWrapper.postValue(weather)
         }
     }
 
@@ -47,7 +54,7 @@ class WeatherViewModel @Inject constructor(
                 if (city.favorite == 1) {
                     city.favorite = 2
                 }
-                if(city.fullCityName == cityWeatherFromDataBase.fullCityName) {
+                if (city.fullCityName == cityWeatherFromDataBase.fullCityName) {
                     city.favorite = 1
                 }
             }

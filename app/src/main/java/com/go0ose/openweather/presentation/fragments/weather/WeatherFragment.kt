@@ -31,12 +31,17 @@ class WeatherFragment() : Fragment(R.layout.fragment_weather) {
     }
 
     private val binding: FragmentWeatherBinding by viewBinding()
+
     @Inject
     lateinit var viewModel: WeatherViewModel
     private val adapterHourly by lazy { HourlyAdapter() }
     private val adapterDaily by lazy { DailyAdapter(onDailyItemClickListener) }
 
-    private val cityWeatherFromDataBase: CityWeatherFromDataBase by lazy { arguments?.getParcelable(WEATHER_KEY)!! }
+    private val cityWeatherFromDataBase: CityWeatherFromDataBase by lazy {
+        arguments?.getParcelable(
+            WEATHER_KEY
+        )!!
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -60,7 +65,11 @@ class WeatherFragment() : Fragment(R.layout.fragment_weather) {
                         cityWeatherFromDataBase.favorite = 1
 
                         viewModel.changeFavorite(cityWeatherFromDataBase)
-                        Toast.makeText(requireContext(), "Теперь это основной город", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            getString(R.string.now_it_is_the_main_city),
+                            Toast.LENGTH_SHORT
+                        ).show()
 
                         addOrFavorite.setImageResource(0)
                         initViews()
@@ -74,7 +83,7 @@ class WeatherFragment() : Fragment(R.layout.fragment_weather) {
                         )
                         cityWeatherFromDataBase.favorite = 2
                         viewModel.addToDataBase(cityWeatherFromDataBase)
-                        Toast.makeText(requireContext(), "Добавлено", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), getString(R.string.added), Toast.LENGTH_SHORT).show()
                         initViews()
                     }
                 }
@@ -101,9 +110,12 @@ class WeatherFragment() : Fragment(R.layout.fragment_weather) {
                 temperature.text = weatherWrapper.temp
                 mainIcon.setImageResource(weatherWrapper.mainIcon)
                 cloudCover.text = weatherWrapper.description
-                feelsLike.text = weatherWrapper.fellsLike
-                windSpeedText.text = weatherWrapper.windSpeed
-                pressureText.text = weatherWrapper.pressure
+                feelsLike.text = "${getString(R.string.feels_like)} ${weatherWrapper.fellsLike}"
+                windSpeedText.text =
+                    "${weatherWrapper.windSpeed} ${getString(R.string.m_s)} ${
+                        getString(weatherWrapper.windDeg.directionId)
+                    }"
+                pressureText.text = "${weatherWrapper.pressure} ${getString(R.string.mmhg)}"
                 humidityText.text = weatherWrapper.humidity
 
                 adapterHourly.submitList(weatherWrapper.hourlyItems)

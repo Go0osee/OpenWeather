@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.Toast
-import androidx.annotation.DrawableRes
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +18,6 @@ import com.go0ose.openweather.presentation.fragments.citybase.recycler.OnCityBas
 import com.go0ose.openweather.presentation.fragments.citybase.recycler.SwipeToDeleteCallback
 import com.go0ose.openweather.presentation.fragments.search.SearchFragment
 import com.go0ose.openweather.presentation.fragments.weather.WeatherFragment
-import com.go0ose.openweather.utils.ext.toFirstFavorite
 import javax.inject.Inject
 
 class CityBaseFragment() : Fragment(R.layout.fragment_citybase) {

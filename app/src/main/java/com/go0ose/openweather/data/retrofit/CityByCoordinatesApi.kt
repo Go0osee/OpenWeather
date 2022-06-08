@@ -12,7 +12,7 @@ interface CityByCoordinatesApi {
         @Path("longitude") lon: String,
         @Query("access_token") accessToken: String = RetrofitClient.MAPBOX_API_KEY,
         @Query("limit") limit: String = "1",
-        @Query("language") language: String = "ru",
+        @Query("language") language: String,
         @Query("types") types: String = "place",
         ): CityResponse
 }

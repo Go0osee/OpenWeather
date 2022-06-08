@@ -8,7 +8,6 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.go0ose.openweather.R
 import com.go0ose.openweather.databinding.FragmentDailyBottomSheetBinding
 import com.go0ose.openweather.domain.model.DailyItem
-import com.go0ose.openweather.presentation.fragments.weather.WeatherFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class DailyBottomSheetFragment() : BottomSheetDialogFragment() {
@@ -18,9 +17,15 @@ class DailyBottomSheetFragment() : BottomSheetDialogFragment() {
         private const val DAILY_WEATHER_KEY = "daily_weather_key"
         fun newInstance(dailyItem: DailyItem) = DailyBottomSheetFragment()
             .apply {
-                arguments = Bundle().apply { putParcelable(DailyBottomSheetFragment.DAILY_WEATHER_KEY, dailyItem) }
+                arguments = Bundle().apply {
+                    putParcelable(
+                        DailyBottomSheetFragment.DAILY_WEATHER_KEY,
+                        dailyItem
+                    )
+                }
             }
     }
+
     private val binding: FragmentDailyBottomSheetBinding by viewBinding()
     private val dailyItem: DailyItem by lazy { arguments?.getParcelable(DAILY_WEATHER_KEY)!! }
 
@@ -41,8 +46,9 @@ class DailyBottomSheetFragment() : BottomSheetDialogFragment() {
             dayText.text = dailyItem.day
             dateText.text = dailyItem.date
             weatherImage.setImageResource(dailyItem.iconDaily)
-            windSpeedText.text = dailyItem.windSpeed
-            pressureText.text = dailyItem.pressure
+            windSpeedText.text =
+                "${dailyItem.windSpeed} ${getString(R.string.m_s)} ${getString(dailyItem.windDeg.directionId)}"
+            pressureText.text = "${dailyItem.pressure} ${getString(R.string.mmhg)}"
             humidityText.text = dailyItem.humidity
             tempMorn.text = dailyItem.tempMorn
             tempDay.text = dailyItem.tempDay
@@ -55,8 +61,8 @@ class DailyBottomSheetFragment() : BottomSheetDialogFragment() {
             sunriseText.text = dailyItem.sunrise
             sunsetText.text = dailyItem.sunset
             moonImage.setImageResource(dailyItem.moonPhase.icon)
-            moonText.text = dailyItem.moonPhase.name
-            uvText.text = dailyItem.uvi
+            moonText.setText(dailyItem.moonPhase.description)
+            uvText.text = "${dailyItem.uvi.index}, ${getString(dailyItem.uvi.description)}"
             rainText.text = dailyItem.pop
         }
     }
