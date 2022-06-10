@@ -8,18 +8,19 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.go0ose.openweather.R
 import com.go0ose.openweather.databinding.FragmentDailyBottomSheetBinding
 import com.go0ose.openweather.domain.model.DailyItem
+import com.go0ose.openweather.utils.AppConstants.DAILY_WEATHER_KEY
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class DailyBottomSheetFragment() : BottomSheetDialogFragment() {
 
     companion object {
         const val TAG = "DailyBottomSheetFragment"
-        private const val DAILY_WEATHER_KEY = "daily_weather_key"
+
         fun newInstance(dailyItem: DailyItem) = DailyBottomSheetFragment()
             .apply {
                 arguments = Bundle().apply {
                     putParcelable(
-                        DailyBottomSheetFragment.DAILY_WEATHER_KEY,
+                        DAILY_WEATHER_KEY,
                         dailyItem
                     )
                 }

@@ -10,6 +10,7 @@ import com.go0ose.openweather.utils.mapper.toCityCoordinates
 import com.go0ose.openweather.utils.mapper.toNewCityWeatherFromDataBase
 import com.go0ose.openweather.domain.model.CityItem
 import com.go0ose.openweather.domain.model.CityWeatherFromDataBase
+import com.go0ose.openweather.utils.AppConstants.BACKGROUND_KEY
 import com.go0ose.openweather.utils.prefs.SharedPreferenceManager
 import kotlinx.coroutines.launch
 
@@ -18,10 +19,6 @@ class SearchViewModel(
     private val cityBaseInteractor: CityBaseInteractor,
     private val prefs: SharedPreferenceManager
 ) : ViewModel() {
-
-    companion object {
-        private const val BACKGROUND_KEY = "BACKGROUND_KEY"
-    }
 
     private val _cityItem = MutableLiveData<List<CityItem>>()
     val cityItem: LiveData<List<CityItem>> get() = _cityItem

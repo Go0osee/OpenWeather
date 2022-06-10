@@ -18,12 +18,12 @@ import com.go0ose.openweather.presentation.fragments.citybase.recycler.OnCityBas
 import com.go0ose.openweather.presentation.fragments.citybase.recycler.SwipeToDeleteCallback
 import com.go0ose.openweather.presentation.fragments.search.SearchFragment
 import com.go0ose.openweather.presentation.fragments.weather.WeatherFragment
+import com.go0ose.openweather.utils.ext.ifNetworkUnavailable
 import javax.inject.Inject
 
 class CityBaseFragment() : Fragment(R.layout.fragment_citybase) {
 
     private val binding: FragmentCitybaseBinding by viewBinding()
-
     @Inject
     lateinit var viewModel: CityBaseViewModel
     private val cityBaseAdapter by lazy { CityBaseAdapter(onItemClickListener) }
@@ -39,6 +39,9 @@ class CityBaseFragment() : Fragment(R.layout.fragment_citybase) {
         super.onViewCreated(view, savedInstanceState)
         WeatherApplication.appComponent?.inject(this)
 
+        binding.root.ifNetworkUnavailable{
+            Toast.makeText(requireContext(), getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show()
+        }
         backgroundId =  viewModel.loadBackgroundFromPrefs()
         viewModel.loadCityWeatherFromDataBase()
         initViews()
@@ -86,7 +89,7 @@ class CityBaseFragment() : Fragment(R.layout.fragment_citybase) {
             } else {
                 Toast.makeText(
                     requireContext(),
-                    "Невозможно удалить основной город",
+                    getString(R.string.it_is_not_possible_to_delete_the_main_city),
                     Toast.LENGTH_SHORT
                 ).show()
                 cityBaseAdapter.notifyDataSetChanged()

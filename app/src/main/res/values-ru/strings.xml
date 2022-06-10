@@ -35,4 +35,7 @@
     <string name="now">сейчас</string>
     <string name="added">Добавлено</string>
     <string name="now_it_is_the_main_city">Теперь это основной город</string>
+    <string name="updated">Обновлено</string>
+    <string name="no_internet_connection">Нет подключения к интернету</string>
+    <string name="it_is_not_possible_to_delete_the_main_city">Невозможно удалить основной город</string>
 </resources>

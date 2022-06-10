@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_widget">
+
+    <TextView
+        android:id="@+id/cityNameWidget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        tools:text="Могилев" />
+
+    <TextView
+        android:id="@+id/tempWidget"
+        android:layout_width="66dp"
+        android:layout_height="wrap_content"
+
+        android:layout_alignTop="@+id/cityNameWidget"
+        android:layout_alignBottom="@+id/cityNameWidget"
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="-7dp"
+        android:layout_marginBottom="-19dp"
+        android:layout_toStartOf="@+id/reload"
+        android:layout_toEndOf="@+id/cityNameWidget"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="32dp"
+        tools:text="+17" />
+
+    <TextView
+        android:id="@+id/fellsLikeWidget"
+        android:layout_width="106dp"
+        android:layout_height="47dp"
+        android:layout_below="@+id/tempWidget"
+        android:layout_alignStart="@+id/tempWidget"
+        android:layout_alignEnd="@+id/tempWidget"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="14dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="12dp"
+        tools:text="Ощущается как: +17" />
+
+    <ImageView
+        android:id="@+id/reload"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/ic_baseline_update_24" />
+
+    <ImageView
+        android:id="@+id/iconWidget"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_below="@+id/cityNameWidget"
+        android:layout_alignStart="@+id/cityNameWidget"
+        android:layout_alignEnd="@+id/cityNameWidget"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="-1dp"
+        tools:src="@drawable/ic_daily_03d" />
+
+</RelativeLayout>

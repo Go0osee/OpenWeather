@@ -1,8 +1,6 @@
 package com.go0ose.openweather.domain.model
 
 import androidx.annotation.DrawableRes
-import com.go0ose.openweather.domain.model.DailyItem
-import com.go0ose.openweather.domain.model.HourlyItem
 import com.go0ose.openweather.utils.mapper.enums.WingDeg
 
 class WeatherWrapper(

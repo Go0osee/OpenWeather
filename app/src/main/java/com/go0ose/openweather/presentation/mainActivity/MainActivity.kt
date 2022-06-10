@@ -3,6 +3,7 @@ package com.go0ose.openweather.presentation.mainActivity
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.go0ose.openweather.R
@@ -10,7 +11,7 @@ import com.go0ose.openweather.WeatherApplication
 import com.go0ose.openweather.databinding.ActivityMainBinding
 import com.go0ose.openweather.utils.ext.openFragment
 import com.go0ose.openweather.presentation.fragments.weather.WeatherFragment
-import kotlinx.coroutines.delay
+import com.go0ose.openweather.utils.ext.isNetworkAvailable
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -29,9 +30,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-
-        checkLocationPermission()
-        openWeatherFragment()
+        if(binding.root.isNetworkAvailable()){
+            checkLocationPermission()
+            openWeatherFragment()
+        } else {
+            Toast.makeText(this, getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun openWeatherFragment() {

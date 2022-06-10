@@ -1,14 +1,11 @@
 package com.go0ose.openweather.utils.prefs
 
 import android.content.Context
+import com.go0ose.openweather.utils.AppConstants.PREFS_NAME
 
 class SharedPreferenceImpl(
     private val context: Context
 ) : SharedPreferenceManager {
-
-    companion object {
-        private const val PREFS_NAME = "7"
-    }
 
     private val prefs by lazy {
         context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)

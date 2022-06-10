@@ -35,4 +35,7 @@
     <string name="now">now</string>
     <string name="added">Added</string>
     <string name="now_it_is_the_main_city">Now this is the main city</string>
+    <string name="updated">Updated</string>
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="it_is_not_possible_to_delete_the_main_city">It is not possible to delete the main city</string>
 </resources>

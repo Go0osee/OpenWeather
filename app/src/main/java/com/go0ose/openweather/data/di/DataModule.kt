@@ -12,6 +12,7 @@ import dagger.Provides
 
 @Module
 class DataModule {
+
     @Provides
     fun provideWeatherApi(): WeatherApi {
         return RetrofitClient.getWeatherApi()

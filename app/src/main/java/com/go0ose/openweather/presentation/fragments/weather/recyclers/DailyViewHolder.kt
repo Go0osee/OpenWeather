@@ -11,8 +11,7 @@ import com.go0ose.openweather.domain.model.DailyItem
 class DailyViewHolder(
     private val binding: ItemDailyWeatherBinding,
     private val onDailyItemClickListener: OnDailyItemClickListener,
-) :
-    RecyclerView.ViewHolder(binding.root) {
+) : RecyclerView.ViewHolder(binding.root) {
 
     companion object {
         fun newInstance(

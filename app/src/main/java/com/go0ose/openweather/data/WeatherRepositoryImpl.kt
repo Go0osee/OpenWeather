@@ -12,6 +12,7 @@ class WeatherRepositoryImpl(
     private val cityByCoordinatesApi: CityByCoordinatesApi,
     private val coordinatesByCityApi: CoordinatesByCityApi
 ) : WeatherRepository {
+
     override suspend fun getWeather(CityCoordinates: CityCoordinates): WeatherResponse {
         return withContext(Dispatchers.IO) {
 
@@ -44,5 +45,4 @@ class WeatherRepositoryImpl(
     }
 
     private fun getLang(): String = Locale.getDefault().language
-
 }

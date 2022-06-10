@@ -17,13 +17,15 @@ import com.go0ose.openweather.presentation.fragments.daily.DailyBottomSheetFragm
 import com.go0ose.openweather.presentation.fragments.weather.recyclers.DailyAdapter
 import com.go0ose.openweather.presentation.fragments.weather.recyclers.HourlyAdapter
 import com.go0ose.openweather.presentation.fragments.weather.recyclers.OnDailyItemClickListener
+import com.go0ose.openweather.utils.AppConstants.WEATHER_KEY
+import com.go0ose.openweather.utils.ext.ifNetworkUnavailable
 import javax.inject.Inject
 
 class WeatherFragment() : Fragment(R.layout.fragment_weather) {
 
     companion object {
         const val TAG = "WeatherFragment"
-        private const val WEATHER_KEY = "weather_key"
+
         fun newInstance(cityWeatherFromDataBase: CityWeatherFromDataBase) = WeatherFragment()
             .apply {
                 arguments = Bundle().apply { putParcelable(WEATHER_KEY, cityWeatherFromDataBase) }
@@ -31,16 +33,13 @@ class WeatherFragment() : Fragment(R.layout.fragment_weather) {
     }
 
     private val binding: FragmentWeatherBinding by viewBinding()
-
     @Inject
     lateinit var viewModel: WeatherViewModel
     private val adapterHourly by lazy { HourlyAdapter() }
     private val adapterDaily by lazy { DailyAdapter(onDailyItemClickListener) }
 
     private val cityWeatherFromDataBase: CityWeatherFromDataBase by lazy {
-        arguments?.getParcelable(
-            WEATHER_KEY
-        )!!
+        arguments?.getParcelable(WEATHER_KEY)!!
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,6 +47,9 @@ class WeatherFragment() : Fragment(R.layout.fragment_weather) {
 
         WeatherApplication.appComponent?.inject(this)
 
+        binding.root.ifNetworkUnavailable{
+            Toast.makeText(requireContext(), getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show()
+        }
         viewModel.loadWeather(cityWeatherFromDataBase)
         initViews()
         initObserver()
@@ -55,6 +57,7 @@ class WeatherFragment() : Fragment(R.layout.fragment_weather) {
 
     private fun initViews() {
         with(binding) {
+
             when (cityWeatherFromDataBase.favorite) {
                 2 -> {
                     addOrFavorite.setImageResource(R.drawable.ic_main_favourite)
@@ -112,9 +115,7 @@ class WeatherFragment() : Fragment(R.layout.fragment_weather) {
                 cloudCover.text = weatherWrapper.description
                 feelsLike.text = "${getString(R.string.feels_like)} ${weatherWrapper.fellsLike}"
                 windSpeedText.text =
-                    "${weatherWrapper.windSpeed} ${getString(R.string.m_s)} ${
-                        getString(weatherWrapper.windDeg.directionId)
-                    }"
+                    "${weatherWrapper.windSpeed} ${getString(R.string.m_s)} ${getString(weatherWrapper.windDeg.directionId)}"
                 pressureText.text = "${weatherWrapper.pressure} ${getString(R.string.mmhg)}"
                 humidityText.text = weatherWrapper.humidity
 

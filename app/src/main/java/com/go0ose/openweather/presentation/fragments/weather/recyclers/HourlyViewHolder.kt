@@ -8,8 +8,7 @@ import com.go0ose.openweather.domain.model.HourlyItem
 
 class HourlyViewHolder(
     private val binding: ItemHourWeatherBinding,
-) :
-    RecyclerView.ViewHolder(binding.root) {
+) : RecyclerView.ViewHolder(binding.root) {
 
     companion object {
         fun newInstance(

@@ -6,6 +6,7 @@ import com.go0ose.openweather.presentation.fragments.citybase.CityBaseViewModel
 import com.go0ose.openweather.presentation.fragments.search.SearchViewModel
 import com.go0ose.openweather.presentation.fragments.weather.WeatherViewModel
 import com.go0ose.openweather.presentation.mainActivity.MainViewModel
+import com.go0ose.openweather.presentation.widget.WidgetViewModel
 import com.go0ose.openweather.utils.prefs.SharedPreferenceManager
 import com.go0ose.openweather.utils.resource.ResourceProvider
 import dagger.Module
@@ -49,5 +50,13 @@ class ViewModelModule {
         prefs: SharedPreferenceManager
     ): SearchViewModel {
         return SearchViewModel(weatherInteractor, cityBaseInteractor, prefs)
+    }
+
+    @Provides
+    fun provideWidgetViewModel(
+        weatherInteractor: WeatherInteractor,
+        cityBaseInteractor: CityBaseInteractor
+    ): WidgetViewModel {
+        return WidgetViewModel(weatherInteractor, cityBaseInteractor)
     }
 }

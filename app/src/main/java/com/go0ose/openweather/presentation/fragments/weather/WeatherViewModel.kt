@@ -10,6 +10,7 @@ import com.go0ose.openweather.domain.WeatherInteractor
 import com.go0ose.openweather.utils.mapper.toCityCoordinates
 import com.go0ose.openweather.domain.model.CityWeatherFromDataBase
 import com.go0ose.openweather.domain.model.WeatherWrapper
+import com.go0ose.openweather.utils.AppConstants.BACKGROUND_KEY
 import com.go0ose.openweather.utils.prefs.SharedPreferenceManager
 import com.go0ose.openweather.utils.resource.ResourceProvider
 import kotlinx.coroutines.launch
@@ -21,10 +22,6 @@ class WeatherViewModel @Inject constructor(
     private val prefs: SharedPreferenceManager,
     private val resourceProvider: ResourceProvider
 ) : ViewModel() {
-
-    companion object {
-        private const val BACKGROUND_KEY = "BACKGROUND_KEY"
-    }
 
     private val _weatherWrapper = MutableLiveData<WeatherWrapper>()
     val weatherWrapper: LiveData<WeatherWrapper> get() = _weatherWrapper

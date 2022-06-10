@@ -14,6 +14,7 @@ import com.go0ose.openweather.utils.mapper.toCityCoordinates
 import com.go0ose.openweather.utils.mapper.toCityWeatherFromDataBaseFirstLogin
 import com.go0ose.openweather.domain.model.CityCoordinates
 import com.go0ose.openweather.domain.model.CityWeatherFromDataBase
+import com.go0ose.openweather.utils.AppConstants.FIRST_LOGIN_KEY
 import com.go0ose.openweather.utils.prefs.SharedPreferenceManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -25,10 +26,6 @@ class MainViewModel @Inject constructor(
     private val weatherInteractor: WeatherInteractor,
     private val prefs: SharedPreferenceManager
 ) : ViewModel() {
-
-    companion object {
-        private const val FIRST_LOGIN_KEY = "FIRST_LOGIN_KEY"
-    }
 
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 

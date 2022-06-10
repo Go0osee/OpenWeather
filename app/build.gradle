@@ -31,7 +31,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    buildFeatures{
+    buildFeatures {
         viewBinding true
     }
 }
@@ -58,7 +58,7 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
 
-    // viewBinding
+    // ViewBinding
     implementation 'com.github.kirich1409:viewbindingpropertydelegate:1.5.3'
 
     // Coroutines

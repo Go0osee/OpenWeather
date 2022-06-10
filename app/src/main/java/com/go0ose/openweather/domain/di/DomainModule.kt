@@ -10,6 +10,7 @@ import dagger.Provides
 
 @Module
 class DomainModule {
+
     @Provides
     fun provideWeatherInteractor(
         repository: WeatherRepository

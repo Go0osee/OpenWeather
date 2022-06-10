@@ -6,7 +6,10 @@ import com.go0ose.openweather.domain.model.CityCoordinates
 import com.go0ose.openweather.domain.model.CityItem
 import com.go0ose.openweather.domain.model.WeatherWrapper
 
-class WeatherInteractorImpl(private val repository: WeatherRepository) : WeatherInteractor {
+class WeatherInteractorImpl(
+    private val repository: WeatherRepository
+    ) : WeatherInteractor {
+
     override suspend fun getWeather(cityCoordinates: CityCoordinates): WeatherWrapper {
         return repository.getWeather(cityCoordinates).toWeatherWrapper()
     }

@@ -16,20 +16,23 @@
 
     <ImageView
         android:id="@+id/back"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:scaleType="center"
         android:src="@drawable/ic_main_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/search"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:scaleX="0.9"
+        android:scaleY="0.9"
         android:src="@drawable/ic_main_search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -52,10 +55,10 @@
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/favorite"
-        app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/item_city" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

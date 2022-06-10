@@ -10,6 +10,7 @@ import com.go0ose.openweather.utils.mapper.toCityCoordinates
 import com.go0ose.openweather.utils.mapper.toCityWeatherFromDataBase
 import com.go0ose.openweather.domain.model.CityWeatherFromDataBase
 import com.go0ose.openweather.domain.model.WeatherWrapper
+import com.go0ose.openweather.utils.AppConstants.BACKGROUND_KEY
 import com.go0ose.openweather.utils.mapper.toFirstFavorite
 import com.go0ose.openweather.utils.prefs.SharedPreferenceManager
 import kotlinx.coroutines.launch
@@ -19,10 +20,6 @@ class CityBaseViewModel(
     private val weatherInteractor: WeatherInteractor,
     private val prefs: SharedPreferenceManager
 ) : ViewModel() {
-
-    companion object {
-        private const val BACKGROUND_KEY = "BACKGROUND_KEY"
-    }
 
     private val _weatherWrapperList = MutableLiveData<List<WeatherWrapper>>()
     val weatherWrapperList: LiveData<List<WeatherWrapper>> get() = _weatherWrapperList

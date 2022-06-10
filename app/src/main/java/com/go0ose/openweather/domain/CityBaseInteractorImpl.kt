@@ -7,6 +7,7 @@ import com.go0ose.openweather.domain.model.CityWeatherFromDataBase
 class CityBaseInteractorImpl(
     private val repository: CityBaseRepository
 ) : CityBaseInteractor {
+
     override suspend fun addCityWeatherFromDataBase(cityWeatherFromDataBase: CityWeatherFromDataBase) {
         repository.saveCity(cityWeatherFromDataBase.toCityWeatherEntity())
     }

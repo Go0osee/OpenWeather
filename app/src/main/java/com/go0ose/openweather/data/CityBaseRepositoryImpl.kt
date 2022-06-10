@@ -9,6 +9,7 @@ import kotlinx.coroutines.withContext
 class CityBaseRepositoryImpl(
     private val cityWeatherDao: CityWeatherDao
 ): CityBaseRepository {
+
     override suspend fun getSavedCities(): List<CityWeatherEntity> {
         return withContext(Dispatchers.IO) {
             cityWeatherDao.getAllCityWeather()

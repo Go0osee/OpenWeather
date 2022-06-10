@@ -5,6 +5,7 @@ import com.go0ose.openweather.data.storage.entity.CityWeatherEntity
 
 @Dao
 interface CityWeatherDao {
+
     @Query("SELECT * FROM city_weather")
     suspend fun getAllCityWeather(): List<CityWeatherEntity>
 
