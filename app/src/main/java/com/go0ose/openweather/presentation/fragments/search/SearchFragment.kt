@@ -2,7 +2,6 @@ package com.go0ose.openweather.presentation.fragments.search
 
 import android.os.Bundle
 import android.view.View
-import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -20,6 +19,7 @@ import javax.inject.Inject
 class SearchFragment() : Fragment(R.layout.fragment_search) {
 
     private val binding: FragmentSearchBinding by viewBinding()
+
     @Inject
     lateinit var viewModel: SearchViewModel
     private val adapterSearch by lazy { SearchAdapter(onItemClickListener) }
@@ -35,8 +35,12 @@ class SearchFragment() : Fragment(R.layout.fragment_search) {
         super.onViewCreated(view, savedInstanceState)
         WeatherApplication.appComponent?.inject(this)
 
-        binding.root.ifNetworkUnavailable{
-            Toast.makeText(requireContext(), getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show()
+        binding.root.ifNetworkUnavailable {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.no_internet_connection),
+                Toast.LENGTH_SHORT
+            ).show()
         }
         backgroundId = viewModel.loadBackgroundFromPrefs()
         initViews()
@@ -48,9 +52,6 @@ class SearchFragment() : Fragment(R.layout.fragment_search) {
             searchRecycler.adapter = adapterSearch
             background.setImageResource(backgroundId)
             back.setOnClickListener {
-                it.startAnimation(
-                    AnimationUtils.loadAnimation(context, R.anim.anim_image_button)
-                )
                 requireActivity().onBackPressed()
             }
 

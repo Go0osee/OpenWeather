@@ -2,10 +2,11 @@ package com.go0ose.openweather.presentation.fragments.weather
 
 import android.os.Bundle
 import android.view.View
-import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.core.view.isVisible
 import com.go0ose.openweather.R
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.go0ose.openweather.WeatherApplication
 import com.go0ose.openweather.databinding.FragmentWeatherBinding
@@ -14,11 +15,13 @@ import com.go0ose.openweather.domain.model.DailyItem
 import com.go0ose.openweather.utils.ext.openFragmentBase
 import com.go0ose.openweather.presentation.fragments.citybase.CityBaseFragment
 import com.go0ose.openweather.presentation.fragments.daily.DailyBottomSheetFragment
+import com.go0ose.openweather.presentation.fragments.map.MapFragment
 import com.go0ose.openweather.presentation.fragments.weather.recyclers.DailyAdapter
 import com.go0ose.openweather.presentation.fragments.weather.recyclers.HourlyAdapter
 import com.go0ose.openweather.presentation.fragments.weather.recyclers.OnDailyItemClickListener
 import com.go0ose.openweather.utils.AppConstants.WEATHER_KEY
 import com.go0ose.openweather.utils.ext.ifNetworkUnavailable
+import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
 class WeatherFragment() : Fragment(R.layout.fragment_weather) {
@@ -33,6 +36,7 @@ class WeatherFragment() : Fragment(R.layout.fragment_weather) {
     }
 
     private val binding: FragmentWeatherBinding by viewBinding()
+
     @Inject
     lateinit var viewModel: WeatherViewModel
     private val adapterHourly by lazy { HourlyAdapter() }
@@ -47,8 +51,12 @@ class WeatherFragment() : Fragment(R.layout.fragment_weather) {
 
         WeatherApplication.appComponent?.inject(this)
 
-        binding.root.ifNetworkUnavailable{
-            Toast.makeText(requireContext(), getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show()
+        binding.root.ifNetworkUnavailable {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.no_internet_connection),
+                Toast.LENGTH_SHORT
+            ).show()
         }
         viewModel.loadWeather(cityWeatherFromDataBase)
         initViews()
@@ -60,11 +68,8 @@ class WeatherFragment() : Fragment(R.layout.fragment_weather) {
 
             when (cityWeatherFromDataBase.favorite) {
                 2 -> {
-                    addOrFavorite.setImageResource(R.drawable.ic_main_favourite)
+                    addOrFavoriteImage.setImageResource(R.drawable.ic_main_favourite)
                     addOrFavorite.setOnClickListener {
-                        it.startAnimation(
-                            AnimationUtils.loadAnimation(context, R.anim.anim_image_button)
-                        )
                         cityWeatherFromDataBase.favorite = 1
 
                         viewModel.changeFavorite(cityWeatherFromDataBase)
@@ -74,23 +79,33 @@ class WeatherFragment() : Fragment(R.layout.fragment_weather) {
                             Toast.LENGTH_SHORT
                         ).show()
 
-                        addOrFavorite.setImageResource(0)
+                        addOrFavoriteImage.setImageResource(0)
                         initViews()
                     }
                 }
                 3 -> {
-                    addOrFavorite.setImageResource(R.drawable.ic_main_plus)
+                    addOrFavoriteImage.setImageResource(R.drawable.ic_main_plus)
                     addOrFavorite.setOnClickListener {
-                        it.startAnimation(
-                            AnimationUtils.loadAnimation(context, R.anim.anim_image_button)
-                        )
                         cityWeatherFromDataBase.favorite = 2
                         viewModel.addToDataBase(cityWeatherFromDataBase)
-                        Toast.makeText(requireContext(), getString(R.string.added), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            getString(R.string.added),
+                            Toast.LENGTH_SHORT
+                        ).show()
                         initViews()
                     }
                 }
             }
+
+            map.setOnClickListener {
+                requireActivity().openFragmentBase(
+                    MapFragment.newInstance(),
+                    MapFragment.TAG,
+                    R.id.container
+                )
+            }
+
             hourlyRecycler.adapter = adapterHourly
             dailyRecycler.adapter = adapterDaily
 
@@ -123,15 +138,17 @@ class WeatherFragment() : Fragment(R.layout.fragment_weather) {
                 adapterDaily.submitList(weatherWrapper.dailyItems)
 
                 threebars.setOnClickListener {
-                    it.startAnimation(
-                        AnimationUtils.loadAnimation(context, R.anim.anim_image_button)
-                    )
-
                     requireActivity().openFragmentBase(
                         CityBaseFragment.newInstance(),
                         CityBaseFragment.TAG,
                         R.id.container
                     )
+                }
+            }
+
+            lifecycleScope.launchWhenStarted {
+                viewModel.loadingState.collectLatest { state ->
+                    progress.isVisible = state
                 }
             }
         }

@@ -38,4 +38,10 @@
     <string name="updated">Updated</string>
     <string name="no_internet_connection">No internet connection</string>
     <string name="it_is_not_possible_to_delete_the_main_city">It is not possible to delete the main city</string>
+    <string name="temperature">Temperature</string>
+    <string name="clouds">Clouds</string>
+    <string name="precipitations">Precipitations</string>
+    <string name="pressure">Sea level pressure</string>
+    <string name="wind_speed">Wind speed</string>
+    <string name="error">Error</string>
 </resources>

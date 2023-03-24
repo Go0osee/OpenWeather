@@ -7,6 +7,7 @@ import com.go0ose.openweather.domain.di.DomainModule
 import com.go0ose.openweather.presentation.mainActivity.MainActivity
 import com.go0ose.openweather.presentation.di.ViewModelModule
 import com.go0ose.openweather.presentation.fragments.citybase.CityBaseFragment
+import com.go0ose.openweather.presentation.fragments.map.MapFragment
 import com.go0ose.openweather.presentation.fragments.search.SearchFragment
 import com.go0ose.openweather.presentation.fragments.weather.WeatherFragment
 import com.go0ose.openweather.presentation.widget.WeatherWidget
@@ -29,6 +30,7 @@ interface AppComponent {
     fun inject(target: CityBaseFragment)
     fun inject(target: SearchFragment)
     fun inject(target: WeatherWidget)
+    fun inject(target: MapFragment)
 
     @Component.Builder
     interface Builder {

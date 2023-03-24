@@ -13,23 +13,28 @@ class WeatherRepositoryImpl(
     private val coordinatesByCityApi: CoordinatesByCityApi
 ) : WeatherRepository {
 
-    override suspend fun getWeather(CityCoordinates: CityCoordinates): WeatherResponse {
+    override suspend fun getWeather(cityCoordinates: CityCoordinates): WeatherResponse {
         return withContext(Dispatchers.IO) {
 
             val weatherResponse = weatherApi.getWeatherResponse(
-                lat = CityCoordinates.lat,
-                lon = CityCoordinates.lon,
+                lat = cityCoordinates.lat,
+                lon = cityCoordinates.lon,
                 lang = getLang()
             )
 
-            val city = cityByCoordinatesApi.getCityResponse(
-                lat = CityCoordinates.lat,
-                lon = CityCoordinates.lon,
-                language = getLang()
-            ).features[0]
+            try {
+                val city = cityByCoordinatesApi.getCityResponse(
+                    lat = cityCoordinates.lat,
+                    lon = cityCoordinates.lon,
+                    language = getLang()
+                ).features[0]
 
-            weatherResponse.cityName = city.text
-            weatherResponse.fullCityName = city.placeName
+                weatherResponse.cityName = city.text
+                weatherResponse.fullCityName = city.placeName
+            } catch (e: Exception) {
+                weatherResponse.cityName = "---"
+                weatherResponse.fullCityName = "---"
+            }
 
             return@withContext weatherResponse
         }

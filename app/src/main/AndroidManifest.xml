@@ -15,6 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OpenWeather">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCIj8LWQXMkRUDXRlAo5zVKSTRz9yQDwH0" />
         <receiver
             android:name="com.go0ose.openweather.presentation.widget.WeatherWidget"
             android:exported="true">

@@ -2,9 +2,7 @@ package com.go0ose.openweather.presentation.fragments.weather.recyclers
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
-import com.go0ose.openweather.R
 import com.go0ose.openweather.databinding.ItemDailyWeatherBinding
 import com.go0ose.openweather.domain.model.DailyItem
 
@@ -36,9 +34,6 @@ class DailyViewHolder(
                 temp.text = item.tempDay
 
                 root.setOnClickListener {
-                    it.startAnimation(
-                        AnimationUtils.loadAnimation(context, R.anim.anim_image_button)
-                    )
                     onDailyItemClickListener.onItemClick(item)
                 }
             }

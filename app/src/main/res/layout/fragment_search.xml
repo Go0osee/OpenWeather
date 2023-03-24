@@ -14,16 +14,31 @@
         tools:layout_editor_absoluteY="0dp"
         tools:src="@drawable/background_04d" />
 
-    <ImageView
+    <androidx.cardview.widget.CardView
         android:id="@+id/back"
-        android:layout_width="26dp"
-        android:layout_height="26dp"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:scaleType="center"
-        android:src="@drawable/ic_main_back"
+        android:background="@color/transparent"
+        android:backgroundTint="@color/transparent"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="center"
+            android:scaleX="0.9"
+            android:scaleY="0.9"
+            android:src="@drawable/ic_main_back" />
+
+    </androidx.cardview.widget.CardView>
 
     <SearchView
         android:id="@+id/searchCity"

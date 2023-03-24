@@ -3,6 +3,7 @@ package com.go0ose.openweather.utils.mapper
 import com.go0ose.openweather.data.retrofit.*
 import com.go0ose.openweather.data.storage.entity.CityWeatherEntity
 import com.go0ose.openweather.domain.model.*
+import com.go0ose.openweather.presentation.fragments.map.MapWeather
 import com.go0ose.openweather.utils.AppConstants.ADDED_CITY_ID_FAVORITE
 import com.go0ose.openweather.utils.AppConstants.MAIN_CITY_ID_FAVORITE
 import com.go0ose.openweather.utils.AppConstants.NEW_CITY_ID_FAVORITE
@@ -29,6 +30,18 @@ fun WeatherResponse.toWeatherWrapper() =
         pressure = (current.pressure.toDouble() * PRESSURE_INDEX).toInt().toString(),
         hourlyItems = hourly.toHourlyItems(timezoneOffset),
         dailyItems = daily.toDailyItems(timezoneOffset)
+    )
+
+fun WeatherWrapper.toMapWeather() =
+    MapWeather(
+        lat = lat,
+        lng = lon,
+        cityName = cityName,
+        fullCityName = fullCityName,
+        temp = temp,
+        icon = mainIcon,
+        feelsLike = fellsLike,
+        description = description,
     )
 
 fun WeatherWrapper.toCityWeatherFromDataBaseFirstLogin() =

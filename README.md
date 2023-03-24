@@ -1,3 +1,9 @@
 # OpenWeather
 
-![](https://github.com/Go0osee/OpenWeather/blob/fbe380df56e0254798a96995b1d56bfce8e8faab/OpenWeather.gif)
+![](https://github.com/Go0osee/OpenWeather/blob/master/demogifs/demo1.gif)
+
+![](https://github.com/Go0osee/OpenWeather/blob/master/demogifs/demo2.gif)
+
+![](https://github.com/Go0osee/OpenWeather/blob/master/demogifs/demo3.gif)
+
+![](https://github.com/Go0osee/OpenWeather/blob/master/demogifs/demo4.gif)

@@ -2,7 +2,6 @@ package com.go0ose.openweather.presentation.fragments.citybase
 
 import android.os.Bundle
 import android.view.View
-import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -12,13 +11,13 @@ import com.go0ose.openweather.R
 import com.go0ose.openweather.WeatherApplication
 import com.go0ose.openweather.databinding.FragmentCitybaseBinding
 import com.go0ose.openweather.domain.model.CityWeatherFromDataBase
-import com.go0ose.openweather.utils.ext.openFragment
 import com.go0ose.openweather.presentation.fragments.citybase.recycler.CityBaseAdapter
 import com.go0ose.openweather.presentation.fragments.citybase.recycler.OnCityBaseClickListener
 import com.go0ose.openweather.presentation.fragments.citybase.recycler.SwipeToDeleteCallback
 import com.go0ose.openweather.presentation.fragments.search.SearchFragment
 import com.go0ose.openweather.presentation.fragments.weather.WeatherFragment
 import com.go0ose.openweather.utils.ext.ifNetworkUnavailable
+import com.go0ose.openweather.utils.ext.openFragment
 import javax.inject.Inject
 
 class CityBaseFragment() : Fragment(R.layout.fragment_citybase) {
@@ -56,13 +55,9 @@ class CityBaseFragment() : Fragment(R.layout.fragment_citybase) {
         binding.background.setImageResource(backgroundId)
 
         binding.back.setOnClickListener {
-            it.startAnimation(
-                AnimationUtils.loadAnimation(context, R.anim.anim_image_button)
-            )
             requireActivity().onBackPressed()
         }
         binding.search.setOnClickListener {
-            it.startAnimation(AnimationUtils.loadAnimation(context, R.anim.anim_image_button))
             requireActivity().openFragment(
                 SearchFragment.newInstance(),
                 SearchFragment.TAG,

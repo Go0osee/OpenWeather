@@ -13,6 +13,8 @@ import com.go0ose.openweather.domain.model.WeatherWrapper
 import com.go0ose.openweather.utils.AppConstants.BACKGROUND_KEY
 import com.go0ose.openweather.utils.prefs.SharedPreferenceManager
 import com.go0ose.openweather.utils.resource.ResourceProvider
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,8 +28,12 @@ class WeatherViewModel @Inject constructor(
     private val _weatherWrapper = MutableLiveData<WeatherWrapper>()
     val weatherWrapper: LiveData<WeatherWrapper> get() = _weatherWrapper
 
+    private val _loadingState = MutableStateFlow(false)
+    val loadingState = _loadingState.asStateFlow()
+
     fun loadWeather(cityWeatherFromDataBase: CityWeatherFromDataBase) {
         viewModelScope.launch {
+            _loadingState.value = true
             var weather = weatherInteractor.getWeather(cityWeatherFromDataBase.toCityCoordinates())
 
             weather.dailyItems[0].day = resourceProvider.getString(R.string.today)
@@ -35,6 +41,7 @@ class WeatherViewModel @Inject constructor(
             weather.hourlyItems[0].time = resourceProvider.getString(R.string.now)
 
             _weatherWrapper.postValue(weather)
+            _loadingState.value = false
         }
     }
 

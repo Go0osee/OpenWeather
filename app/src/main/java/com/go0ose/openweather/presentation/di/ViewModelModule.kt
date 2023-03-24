@@ -3,6 +3,7 @@ package com.go0ose.openweather.presentation.di
 import com.go0ose.openweather.domain.CityBaseInteractor
 import com.go0ose.openweather.domain.WeatherInteractor
 import com.go0ose.openweather.presentation.fragments.citybase.CityBaseViewModel
+import com.go0ose.openweather.presentation.fragments.map.MapViewModel
 import com.go0ose.openweather.presentation.fragments.search.SearchViewModel
 import com.go0ose.openweather.presentation.fragments.weather.WeatherViewModel
 import com.go0ose.openweather.presentation.mainActivity.MainViewModel
@@ -23,6 +24,14 @@ class ViewModelModule {
         resourceProvider: ResourceProvider
     ): WeatherViewModel {
         return WeatherViewModel(weatherInteractor, cityBaseInteractor, prefs, resourceProvider)
+    }
+
+    @Provides
+    fun provideMapViewModel(
+        weatherInteractor: WeatherInteractor,
+        cityBaseInteractor: CityBaseInteractor
+    ): MapViewModel {
+        return MapViewModel(weatherInteractor, cityBaseInteractor)
     }
 
     @Provides
